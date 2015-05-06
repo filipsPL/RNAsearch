@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#import string
-#import numpy as np
 import csv
 import urllib
 import os, errno
@@ -35,10 +33,9 @@ with open('RNA-bezlig-oneline.txt', 'rb') as rna1Csvfile:
       for seqlig in rnalig:
 	#if (seq[0] != seqlig[0] and seqlig[4] == seq[4] and len(seqlig[4])>15): #-- identyczne
 	#if (seq[0] != seqlig[0] and (seqlig[4] in seq[4] or seq[4] in seqlig[4]) and seq[4] != seqlig[4] and len(seq[4])>25 and len(seqlig[4])>25): # nieidentyczne - ligandowa sekwencja w apo albo odwrotnie
-	#podobienstwo
-	diff=difflib.SequenceMatcher(None, seqlig[4], seq[4])
+	
+	diff=difflib.SequenceMatcher(None, seqlig[4], seq[4]) #podobienstwo by Ratcliff and Obershelp
 	podob = float(diff.ratio())
-	#print podob
 	#if (seq[0] != seqlig[0] and podob > 0.8 and seq[4] != seqlig[4] and len(seq[4])>25 and len(seqlig[4])>25): # nieidentyczne - ligandowa sekwencja w apo albo odwrotnie
 	if (seq[0] != seqlig[0] and podob <= 0.8 and podob > 0.7 and seq[4] != seqlig[4] and len(seq[4])>25 and len(seqlig[4])>25): # nieidentyczne - ligandowa sekwencja w apo albo odwrotnie
 	  if seq[0] not in lista: lista[seq[0]] = []
